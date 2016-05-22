@@ -12,8 +12,8 @@ import interfaces.Server;
 
 public class UDPServerApp {
 	public static void main(String args[]) throws Exception{
-		AbstractFactory serverFactory = FactoryProducer.getFactory(Settings.SERVER);
-		Server server = serverFactory.getServer(5000, Settings.UDP);
+		AbstractFactory serverFactory = FactoryProducer.getFactory(Settings.types.SERVER);
+		Server server = serverFactory.getServer(5000, Settings.types.UDP);
 		System.out.println("Servidor em execução");
 		Connection connection = server.acceptConnection();
 		

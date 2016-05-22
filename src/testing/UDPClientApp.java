@@ -13,8 +13,8 @@ public class UDPClientApp {
 	private static int idMensagem = 1;
 
 	public static void main(String[] args) throws Exception{
-		AbstractFactory clientFactory = FactoryProducer.getFactory(Settings.CLIENT);
-		Client client = clientFactory.getClient(Settings.UDP);
+		AbstractFactory clientFactory = FactoryProducer.getFactory(Settings.types.CLIENT);
+		Client client = clientFactory.getClient(Settings.types.UDP);
 		Connection connection = client.connectToServer("localhost", 5000);
 		System.out.println(connection.receive());
 		
