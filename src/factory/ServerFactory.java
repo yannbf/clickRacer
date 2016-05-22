@@ -10,13 +10,13 @@ import interfaces.Server;
 public class ServerFactory extends AbstractFactory{
 
 	@Override
-	public Server getServer(int port, Settings protocolo) throws IOException {
+	public Server getServer(int port, Settings.types protocolo) throws IOException {
  
-		if (protocolo.equals(Settings.TCP)) {
+		if (protocolo.equals(protocolo.TCP)) {
 			return new TCPServer(port);
 		} 
 		
-		if(protocolo.equals(Settings.UDP)){
+		if(protocolo.equals(protocolo.UDP)){
 			return new UDPServer(port);
 		}
 		
@@ -24,7 +24,7 @@ public class ServerFactory extends AbstractFactory{
 	}
 
 	@Override
-	public Client getClient(Settings protocol) { 
+	public Client getClient(Settings.types protocol) { 
 		return null;
 	} 
 }

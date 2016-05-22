@@ -1,10 +1,14 @@
 package factory;
 
-public enum Settings {
+public class Settings {
 
-	CLIENT,
-	SERVER,
-	TCP,
-	UDP;
+	public static final String host = "localhost";
+	public static final int port = 5000;
+	public static enum types {
+		CLIENT,
+		SERVER,
+		TCP,
+		UDP;
+	}
 	
 }

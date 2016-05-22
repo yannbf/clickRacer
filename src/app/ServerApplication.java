@@ -7,6 +7,7 @@ import java.util.List;
 import factory.AbstractFactory;
 import factory.FactoryProducer;
 import factory.Settings;
+import factory.Settings.types;
 import interfaces.Connection;
 import interfaces.Server;
 
@@ -16,13 +17,12 @@ public class ServerApplication {
 
 	public static void main(String[] args) throws IOException {
 		
-		Settings serverType = Settings.TCP;
-		int port = 5000;
+		types serverType = Settings.types.TCP;
 
-		AbstractFactory serverFactory = FactoryProducer.getFactory(Settings.SERVER);
-		Server server = serverFactory.getServer(port, serverType);
+		AbstractFactory serverFactory = FactoryProducer.getFactory(serverType.SERVER);
+		Server server = serverFactory.getServer(Settings.port, serverType);
 		
-		System.out.println("Server connected on port " + port + ".");
+		System.out.println("Server connected on port " + Settings.port + ".");
 		
 		while(true){
 			

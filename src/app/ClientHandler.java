@@ -18,9 +18,10 @@ public class ClientHandler extends Thread{
 			
 			if(message != null){				
 				System.out.println(message);
-				ctx.click(message);
+				
+				String[] params = message.split(",");
+				ctx.updatePlayers(params[0], params[1], Integer.parseInt(params[2]));
 			}
-		
 		}
 	}
 }
