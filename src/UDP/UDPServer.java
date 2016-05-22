@@ -29,54 +29,23 @@ public class UDPServer implements Server {
 		DatagramPacket receivedPacket = new DatagramPacket(buffer, buffer.length);
 
 		try {
-			
 			datagramSocket.receive(receivedPacket);
-			
 			String message = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
 			
 			if(message.equals("start-server")){
 			
-				DatagramSocket novoSocket = generateNewSocket();
-				InetAddress address = receivedPacket.getAddress();
+				InetAddress iAddress = receivedPacket.getAddress();
 				int port = receivedPacket.getPort();
-				String mensagem = "server-port:" + port;
-				DatagramPacket toBeSent = new DatagramPacket(mensagem.getBytes(), mensagem.length(), address, port);
+				String mensagem = "your-port:" + port;
+				DatagramPacket toBeSent = new DatagramPacket(mensagem.getBytes(), mensagem.length(), iAddress, port);
 				
 				datagramSocket.send(toBeSent);
-				InetAddress iAddress = receivedPacket.getAddress();
-				
-				return new UDPConnection(novoSocket, iAddress, port);
+				return new UDPConnection(datagramSocket, iAddress, port);
 			}
 		
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		return null;
-
 	}
-
-	private DatagramSocket generateNewSocket(){
-		
-		int port = new SecureRandom().nextInt(50000);
-		
-		boolean creationSucceded = false;
-		
-		DatagramSocket newSocket = null;
-		
-		while(!creationSucceded){
-			
-			try {
-				newSocket = new DatagramSocket(port);
-				creationSucceded = true;
-			} catch (SocketException e) {
-				continue;
-			}
-			
-		}
-		
-		return newSocket;
-		
-	}
-
 }

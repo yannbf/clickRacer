@@ -22,7 +22,7 @@ public class UDPConnection implements Connection {
 
 	@Override
 	public void send(String content){
-		if(!datagramSocket.isClosed()){
+		if(isOpen()){
 			DatagramPacket toBeSent = new DatagramPacket(content.getBytes(),content.length(), iAddress, port);
 			
 			try {
@@ -35,31 +35,27 @@ public class UDPConnection implements Connection {
 
 	@Override
 	public String receive(){
-		if(!datagramSocket.isClosed()){
-			
+		if(isOpen()){
 			byte[] buffer = new byte[4028];
 						
 			try {
-				
 				DatagramPacket receivedPacket = new DatagramPacket(buffer, buffer.length);
-				
 				datagramSocket.receive(receivedPacket);	
-				
 				return new String(receivedPacket.getData(), 0, receivedPacket.getLength());
 			} catch (UnknownHostException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}			
-			
 		}
-
 		return null;
 	}
 
 	@Override
 	public void close(){
-		datagramSocket.close();
+		if(isOpen()){
+			datagramSocket.close();
+		}
 	}
 
 	@Override
