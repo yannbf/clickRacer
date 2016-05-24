@@ -62,5 +62,4 @@ public class UDPConnection implements Connection {
 	public boolean isOpen() {
 		return !datagramSocket.isClosed();
 	}
-
 }
