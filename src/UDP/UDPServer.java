@@ -5,14 +5,13 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
-import java.security.SecureRandom;
+import java.util.ArrayList;
 
 import connection.UDPConnection;
 import interfaces.Connection;
 import interfaces.Server;
 
 public class UDPServer implements Server {
-
 	DatagramSocket datagramSocket;
 
 	public UDPServer(int port) {
@@ -33,7 +32,6 @@ public class UDPServer implements Server {
 			String message = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
 			
 			if(message.equals("start-server")){
-			
 				InetAddress iAddress = receivedPacket.getAddress();
 				int port = receivedPacket.getPort();
 				String mensagem = "your-port:" + port;
@@ -42,7 +40,7 @@ public class UDPServer implements Server {
 				datagramSocket.send(toBeSent);
 				return new UDPConnection(datagramSocket, iAddress, port);
 			}
-		
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
