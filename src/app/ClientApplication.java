@@ -40,7 +40,7 @@ public class ClientApplication extends JPanel implements MouseListener, ActionLi
 
 		players = new ArrayList<Player>();
 
-		Settings.types clientType = Settings.types.TCP;
+		Settings.types clientType = Settings.types.UDP;
 		String address = "localhost";
 		int port = 5000;
 
