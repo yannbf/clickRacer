@@ -28,9 +28,9 @@ public class UDPClient implements Client {
 			socket.receive(receivedPackage);
 			
 			String [] codigo = new String(receivedPackage.getData(), 0, receivedPackage.getLength()).split(":");
-			System.out.println(codigo[0] + "-" + codigo[1]);
+			System.out.println(codigo[0]+": "+codigo[1]);
 			Integer porta = Integer.parseInt(codigo[1]);
-			if(codigo[0].equals("your-port")){
+			if(codigo[0].equals("your-connection-port")){
 				return new UDPConnection(socket, iAddress, porta);
 			}
 			

@@ -32,13 +32,15 @@ public class UDPServer implements Server {
 			String message = new String(receivedPacket.getData(), 0, receivedPacket.getLength());
 			
 			if(message.equals("start-server")){
+				DatagramSocket ds = new DatagramSocket();
+				
 				InetAddress iAddress = receivedPacket.getAddress();
 				int port = receivedPacket.getPort();
-				String mensagem = "your-port:" + port;
+				String mensagem = "your-connection-port:" + ds.getLocalPort();
 				DatagramPacket toBeSent = new DatagramPacket(mensagem.getBytes(), mensagem.length(), iAddress, port);
 				
 				datagramSocket.send(toBeSent);
-				return new UDPConnection(datagramSocket, iAddress, port);
+				return new UDPConnection(ds, iAddress, port);
 			}
 
 		} catch (IOException e) {

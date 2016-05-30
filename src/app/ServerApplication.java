@@ -17,7 +17,7 @@ public class ServerApplication {
 
 	public static void main(String[] args) throws IOException {
 		
-		types serverType = Settings.types.TCP;
+		types serverType = Settings.types.UDP;
 
 		AbstractFactory serverFactory = FactoryProducer.getFactory(serverType.SERVER);
 		Server server = serverFactory.getServer(Settings.port, serverType);
